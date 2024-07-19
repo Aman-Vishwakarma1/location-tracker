@@ -7,8 +7,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+app.set("view engine", "ejs");
 
 io.on("connection", (socket) => {
   console.log("Socket On");
