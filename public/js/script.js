@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("https://location-tracker3.vercel.app/");
 
 if (navigator.geolocation) {
   navigator.geolocation.watchPosition(
