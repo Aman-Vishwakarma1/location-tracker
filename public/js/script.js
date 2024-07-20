@@ -1,7 +1,8 @@
 // Determine the socket URL based on environment
 let socketUrl = "/";
 if (window.location.hostname !== "localhost") {
-  socketUrl = "https://location-tracker3.vercel.app/";
+  socketUrl =
+    "https://location-tracker3-gpj3skice-amanvishwakarma1s-projects.vercel.app/";
 }
 
 const socket = io(socketUrl);
