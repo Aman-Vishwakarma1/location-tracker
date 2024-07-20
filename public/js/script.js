@@ -1,4 +1,10 @@
-const socket = io("https://location-tracker3.vercel.app/");
+// Determine the socket URL based on environment
+let socketUrl = "/";
+if (window.location.hostname !== "localhost") {
+  socketUrl = "https://location-tracker3.vercel.app/";
+}
+
+const socket = io(socketUrl);
 
 if (navigator.geolocation) {
   navigator.geolocation.watchPosition(
@@ -24,23 +30,22 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "Aman Vishwakarma Maps",
 }).addTo(map);
 
-const marker = {};
+const markers = {};
 
 socket.on("recieve-location", (data) => {
   const { id, latitude, longitude } = data;
   map.setView([latitude, longitude], 20);
 
-  if (marker[id]) {
-    marker[id].setLatLng;
-    [latitude, longitude];
+  if (markers[id]) {
+    markers[id].setLatLng([latitude, longitude]);
   } else {
-    marker[id] = L.marker([latitude, longitude], 20).addTo(map);
+    markers[id] = L.marker([latitude, longitude]).addTo(map);
   }
 });
 
 socket.on("user-disconnected", (id) => {
-  if (marker[id]) {
-    map.removeLayer(marker.id);
-    delete marker[id];
+  if (markers[id]) {
+    map.removeLayer(markers[id]);
+    delete markers[id];
   }
 });
