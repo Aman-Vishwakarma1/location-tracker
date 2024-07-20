@@ -8,20 +8,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// Allow requests from your Vercel deployment URL
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://location-tracker3-l9aswq5rq-amanvishwakarma1s-projects.vercel.app/"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 // Use cors middleware with options
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
