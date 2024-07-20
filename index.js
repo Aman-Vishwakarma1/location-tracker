@@ -9,12 +9,14 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // Allow requests from your Vercel deployment URL
-const corsOptions = {
-  origin: "/",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
-};
-
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://yoursite.com");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 // Use cors middleware with options
 app.use(cors(corsOptions));
 
