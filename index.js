@@ -8,27 +8,25 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// Use cors middleware with options
+// Use cors middleware
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join(__dirname, "views"));
+app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "public"));
 
 io.on("connection", (socket) => {
-  console.log("Socket connected:", socket.id);
-
+  console.log("Socket On");
   socket.on("send-location", (data) => {
-    io.emit("receive-location", { id: socket.id, ...data });
+    io.emit("recieve-location", { id: socket.id, ...data });
   });
-
   socket.on("disconnect", () => {
     io.emit("user-disconnected", socket.id);
-    console.log("Socket disconnected:", socket.id);
   });
 });
 
-const PORT = process.env.PORT || 8040;
+const PORT = process.env.PORT || 8040; // Use environment variable for port
 
 app.get("/", (req, res) => {
   res.render("index");
