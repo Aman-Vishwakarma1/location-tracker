@@ -10,7 +10,10 @@ const io = socketio(server);
 
 // Allow requests from your Vercel deployment URL
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://yoursite.com");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://location-tracker3-l9aswq5rq-amanvishwakarma1s-projects.vercel.app/"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
