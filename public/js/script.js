@@ -1,3 +1,4 @@
+const input = window.prompt("Your Name", "Marker");
 const socket = io("", {
   transports: ["websocket"],
 });
@@ -29,13 +30,13 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const marker = {};
 socket.on("recieve-location", (data) => {
   const { id, latitude, longitude } = data;
-  map.setView([latitude, longitude], 20);
+  map.setView([latitude, longitude], 10);
 
   if (marker[id]) {
     marker[id].setLatLng;
     [latitude, longitude];
   } else {
-    marker[id] = L.marker([latitude, longitude], 20).addTo(map);
+    marker[id] = L.marker([latitude, longitude], { title: input }).addTo(map);
   }
 });
 
