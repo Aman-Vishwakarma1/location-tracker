@@ -10,8 +10,7 @@ const io = socketio(server);
 
 // Allow requests from your Vercel deployment URL
 const corsOptions = {
-  origin:
-    "https://location-tracker3-l9aswq5rq-amanvishwakarma1s-projects.vercel.app",
+  origin: "/",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 };
